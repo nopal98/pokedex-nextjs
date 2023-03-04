@@ -88,7 +88,7 @@ export default function Layout({title, children}){
         </div>
       </div>
     </nav>
-            <main className="container mx-auto max-w-xl pt-8 min-h-screen">
+            <main className="container mx-auto max-xl pt-3 min-h-screen">
                 {children}
             </main>
         </div>
