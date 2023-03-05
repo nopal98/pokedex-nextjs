@@ -44,7 +44,7 @@ export default function Home({initialPokemon }) {
     <Layout title="Pokedex by Naufal Ihsan">
       <h1 className="text-4xl mb-8 text-center">Pokedex</h1>
       <div className="container mx-auto">
-      <div className="flex justify-center my-4">
+      {/* <div className="flex justify-center my-4">
           <select
             className="border p-2 rounded-md" 
             onChange={(e) => setValue(e.target.value)}
@@ -53,9 +53,8 @@ export default function Home({initialPokemon }) {
             <option value="1">Normal</option>
             <option value="2">Fighting</option>
             <option value="3">Flying</option>
-            {/* tambahkan option sesuai dengan jenis kategori yang diinginkan */}
           </select>
-        </div>
+        </div> */}
         <InfiniteScroll
           pageStart={0}
           loadMore={loadMore}
