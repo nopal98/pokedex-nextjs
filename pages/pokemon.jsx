@@ -62,15 +62,17 @@ export default function Pokemon({pokeman}){
     }
 
     return (
-        <Layout title={pokeman.name}>
+        <Layout title={`Pokeman | ${pokeman.name}`}>
             {/* Card Tailwind */}
            
             <div className="max-w-sm rounded overflow-hidden shadow-lg bg-green-300 mx-auto">
                 <h4 className="font-bold text-xl p-2 mb-0 pb-0 text-center">{pokeman.name.charAt(0).toUpperCase() + pokeman.name.slice(1)}</h4>
-                <img className="mx-auto" src={pokeman.image} alt={pokeman.name} style={{ width: "auto", height: "175px" }}/>
+                <img className="mx-auto" src={pokeman.image} alt={pokeman.name} style={{ width: "auto", height: "175px", marginBottom: "-20px", marginTop: "-20px"}}/>
+                <p className="px-4 mb-2 text-center text-justify">{pokeman.description}</p>
             <h4 className="font-bold text-base ml-4">Types : {pokeman.types.map((type, index) => (
                  <span className="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" key={index}>{type.type.name}</span>
             ))}</h4>
+               
              <h4 className="font-bold text-base ml-4">Detail :
                 <span className="inline-block bg-gray-200 rounded px-2 py-1 text-sm font-semibold text-gray-700 mr-2 ml-1 mb-2">Weight : {pokeman.weight}</span>
                 <span className="inline-block bg-gray-200 rounded px-2 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Height : {pokeman.height}</span>
@@ -112,10 +114,15 @@ export default function Pokemon({pokeman}){
 export async function getServerSideProps({ query }) {
     const val = query.val;
     try {
-        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${val}`);
+        const [res, res2] = await Promise.all([
+            fetch(`https://pokeapi.co/api/v2/pokemon/${val}`),
+            fetch(`https://pokeapi.co/api/v2/pokemon-species/${val}`)
+        ]);
         const pokeman = await res.json();
+        const desc = await res2.json();
         const paddedId = ('00' + val).slice(-3);
         pokeman.image = pokeman.sprites.front_default;
+        pokeman.description = desc.flavor_text_entries[0].flavor_text;
         return {
             props: { pokeman },
         };
