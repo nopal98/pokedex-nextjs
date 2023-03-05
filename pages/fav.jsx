@@ -115,7 +115,7 @@ export default function Fav({items}){
         <div className="w-1/1 md:w-3/12 lg:w-3/12 px-1 mb-4 mx-4 rounded overflow-hidden shadow-lg bg-green-300"  key={index}>
           
           <h4 className="font-bold text-xl p-3 text-center">{favorite.id}. {favorite.name.charAt(0).toUpperCase() + favorite.name.slice(1)}</h4>
-          <img className="mx-auto" src={favorite.image} alt={favorite.name} />
+          <img className="mx-auto" src={favorite.image} alt={favorite.name} style={{ width: "auto", height: "175px" }} />
           <h4 className="font-bold text-base ml-4">Types : {favorite.types.map((type, index) => (
           <span className="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"  key={index}>{type.type.name}</span>
           ))}</h4>
